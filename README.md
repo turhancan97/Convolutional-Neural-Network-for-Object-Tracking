@@ -9,7 +9,6 @@ The project we prepared for the **Vision-based Control** lecture, which is one o
 2. Face and Eye Detection with OpenCV and Haar Feature based Cascade Classifiers
 3. MNIST Image Classification with Deep Neural Network
 4. MNIST Image Classification with Convolutional Neural Network
-5. Fashion Items Classification with Convolutional Neural Network
-6. Face Mask Detection for COVID19 with OpenCV, Tensorflow 2 and Keras
-7. Object Detection and Tracking in Custom Datasets with Yolov4
+5. Face Mask Detection for COVID19 with OpenCV, Tensorflow 2 and Keras
+6. Object Detection and Tracking in Custom Datasets with Yolov4
 
