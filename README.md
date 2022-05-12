@@ -2,7 +2,7 @@
 * **Author:** [Turhan Can Kargın](https://github.com/turhancan97) and [Kamil Gültekin](https://github.com/kamilgultekin)
 * **Topic:** Vision-Based Control Course Project
 
-The project we prepared for the **Vision-based Control** lecture, which is one of the Poznan University of Technology Automatic Control and Robotics graduate courses. In this project, you will find couple of projects that can be helpful to learn Image Processing, Computer Vision, Deep Neural Network, Convolutional Neural Network topics and OpenCV, Tensorflow, Keras Frameworks.
+The project we prepared for the **Vision-based Control** lecture, which is one of the Poznan University of Technology Automatic Control and Robotics graduate courses. In this project, you will find couple of projects that can be helpful to learn Image Processing, Computer Vision, Deep Neural Network, Convolutional Neural Network topics and OpenCV, Tensorflow, Keras, YOLO Frameworks.
 
 ## Project List
 1. Motion Detection and Tracking with OpenCV
