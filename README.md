@@ -1,3 +1,4 @@
+
 # Convolutional Neural Network for Object Tracking
 * **Author:** [Turhan Can Kargın](https://github.com/turhancan97) and [Kamil Gültekin](https://github.com/kamilgultekin)
 * **Topic:** Vision-Based Control Course Project
@@ -15,11 +16,11 @@ The project we prepared for the **Vision-based Control** lecture, which is one o
 	   * [Deep Neural Networks](#deep-neural-networks)
 	   * [Convolutional Neural Networks](#convolutional-neural-networks)
 * [Object Detection](#object-detection)
-	* [Examples](#examples)
+	* [Examples](#example-detection)
 * [Object Recognition](#object-recognition)
-	* [Examples](#examples)
+	* [Examples](#example-recognition)
 * [Object Tracking](#object-tracking)
-	* [Examples](#examples)
+	* [Examples](#example-tracking)
 * [Project Lists](#project-lists)
 * [Future Work](#future-work)
 * [References](#references)
@@ -59,20 +60,20 @@ pass
 
 pass
 
-## Example
+## Example Detection
 pass
 # Object Recognition
 
 pass
 
 
-## Example
+## Example Recognition
 
 # Object Tracking
 
 pass
 
-## Example
+## Example Tracking
 
 pass
 
@@ -90,4 +91,3 @@ pass
 pass
 # References
 pass
-
