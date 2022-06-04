@@ -14,7 +14,14 @@ The project we prepared for the **Vision-based Control** lecture, which is one o
 		   * [Deep Learning based Computer Vision](#deep-learning-based-computer-vision)
 	   * [Difference between Image Processing  and Computer Vision](#difference-between-image-processing-and-computer-vision)
 	   * [Deep Neural Networks](#deep-neural-networks)
+		   * [Pytorch](#pytorch)
+		   * [Tensorflow and Keras](#tensorflow-and-keras)
+		   * [FastAi](#fastai)
 	   * [Convolutional Neural Networks](#convolutional-neural-networks)
+		   * [R-CNN](#r-cnn)
+		   * [Fast R-CNN](#fast-r-cnn)
+		   * [Faster R-CNN](#faster-r-cnn)
+		   * [YOLO](#r--cnn)
 * [Object Detection](#object-detection)
 	* [Examples](#example-detection)
 * [Object Recognition](#object-recognition)
@@ -48,14 +55,26 @@ pass
 pass
 
 ## Difference between Image Processing  and Computer Vision
-
 pass
-
-
 ## Deep Neural Networks
+pass
+###  Pytorch
+pass
+### Tensorflow and Keras
+pass
+### FastAi
 pass
 ## Convolutional Neural Networks
 pass
+###  R-CNN
+pass
+### Fast R-CNN
+pass
+### Faster R-CNN
+pass
+### Yolo
+pass
+
 # Object Detection
 
 pass
