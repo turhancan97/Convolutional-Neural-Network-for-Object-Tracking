@@ -43,7 +43,6 @@ pass
 ## Image Processing
 **Image processing** is a method that can be identified with different techniques in order to obtain useful information according to the relevant need through the images transferred to the digital media. The image processing method is used to process certain recorded images and modify existing images and graphics to alienate or improve them. For example, it is possible to see the quality declines when scanning photos or documents and transferring them to digital media. This is where the image processing method comes into play during the quality declines. We use image processing method to minimize the degraded image quality and visual distortions. Another example is the maps that we can access via Google Earth. Satellite images are enhanced by image processing techniques. In this way, people are presented with higher quality images. Image processing, which can be used in this and many other places, is among the rapidly developing technologies. It is also one of the main research areas of disciplines such as engineering and computer science [1].
 ![Figure 1 A normal landscape photo and its gray scale](https://user-images.githubusercontent.com/22428774/171999676-3c4dad8b-786d-4084-84b3-496e58b40e0a.png)
-
 Image processing is basically studied in three steps.
 
 * Transferring the image with the necessary tools
@@ -84,8 +83,6 @@ Computer vision aims to make sense of all kinds of two-dimensional, three-dimens
 
 Visual data detection and interpretation constitute the most important algorithm steps in many applications, from autonomous systems such as autonomous vehicles, robots, drones, to security and biometric verification areas. The outputs obtained are fed as inputs to the decision support systems in the next step, completing the artificial intelligence systems [2].
 ![Vision Based Control (1)](https://user-images.githubusercontent.com/22428774/172026103-78ca3882-ff50-4e7a-aa47-27543a0a1e5b.png)
-
-
 
 ### Conventional Computer Vision
 
@@ -152,6 +149,8 @@ pass
 # Future Work
 pass
 # References
-[1] - https://peakup.org/blog/yeni-baslayanlar-icin-goruntu-islemeye-giris/
-[2] - https://yapayzeka.itu.edu.tr/arastirma/bilgisayarla-goru
-[3] - VBM686 – Computer Vision Pinar Duygulu Hacettepe University Lecture Notes
+- [1] - https://peakup.org/blog/yeni-baslayanlar-icin-goruntu-islemeye-giris/
+- [2] - https://yapayzeka.itu.edu.tr/arastirma/bilgisayarla-goru
+- [3] - VBM686 – Computer Vision Pinar Duygulu Hacettepe University Lecture Notes
+
+
