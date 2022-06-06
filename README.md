@@ -11,7 +11,7 @@ The project we prepared for the **Vision-based Control** lecture, which is one o
 	   * [Image Processing](#image-processing)
 		   * [Image Processing Techniques](#image-processing-techniques)
 	   * [Computer Vision](#computer-vision)
-		   * [Conventional Computer Vision](#conventional-computer-vision)
+		   * [Traditional Computer Vision](#traditional-computer-vision)
 		   * [Deep Learning based Computer Vision](#deep-learning-based-computer-vision)
 	   * [Difference between Image Processing  and Computer Vision](#difference-between-image-processing-and-computer-vision)
 	   * [Deep Neural Networks](#deep-neural-networks)
@@ -91,16 +91,44 @@ Computer vision aims to make sense of all kinds of two-dimensional, three-dimens
 Visual data detection and interpretation constitute the most important algorithm steps in many applications, from autonomous systems such as autonomous vehicles, robots, drones, to security and biometric verification areas. The outputs obtained are fed as inputs to the decision support systems in the next step, completing the artificial intelligence systems [2].
 ![Vision Based Control (1)](https://user-images.githubusercontent.com/22428774/172026103-78ca3882-ff50-4e7a-aa47-27543a0a1e5b.png)
 
-### Conventional Computer Vision
+### Traditional Computer Vision
+Computer vision has emerged as a critical research topic, with commercial applications based on computer vision approaches accounting for a significant share of the market. Over the years, the accuracy and speed with which images acquired by cameras are processed and identified has improved. Deep learning, being the most well-known lad in town, is playing a vital role as a computer vision technology.
 
-pass
+**Is deep learning the only way to accomplish computer vision?**
+No, no, no! A few years ago, deep learning made its debut in the field of computer vision. Image processing algorithms and approaches were the mainstays of computer vision at the time. The main task of computer vision was to extract the image's features. When doing a computer vision task, the initial stage was to detect color, edges, corners, and objects. These features are human-engineered, and the extracted features, as well as the methodologies employed for feature extraction, have a direct impact on the model's accuracy and reliability. In the traditional vision scope, the algorithms like SIFT _(Scale-Invariant Feature Transform)_, SURF _(Speeded-Up Robust Features)_, BRIEF _(Binary Robust Independent Elementary Features)_ plays the major role of extracting the features from the raw image.
+
+The difficulty with this approach of feature extraction in image classification is that you have to choose which features to look for in each given image. When the number of classes of the classification goes high or the image clarity goes down it’s really hard to cope up with traditional computer vision algorithms.
 
 ### Deep Learning based Computer Vision
 
-pass
+In the field of computer vision, deep learning, which is a subset of machine learning, has shown considerable performance and accuracy gains. In a popular ImageNet computer vision competition in 2012, a neural network with over 60 million parameters greatly outperformed previous state-of-the-art algorithms to picture recognition, arguably one of the most influential studies in bringing deep learning to computer vision.
+
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/172243755-faa685ad-dd76-4f2b-9cf3-e015bb1faf62.png)
+
+
+The boom started with the convolutional neural networks and the modified architectures of ConvNets. By now it is said that some convNet architectures are so close to 100% accuracy of image classification challenges, sometimes beating the human eye!
+
+The main difference in deep learning approach of computer vision is the concept of end-to-end learning. There’s no longer need of defining the features and do feature engineering. The neural do that for you. It can simply put in this way. Though deep neural networks has its major drawbacks like, need of having huge amount of training data and need of large computation power, the field of computer vision has already conquered by this amazing tool already!
+
 
 ## Difference between Image Processing  and Computer Vision
-pass
+Computer vision and image processing are both attractive fields of computer science.
+
+In **computer vision**, computers or machines are programmed to extract high-level information from digital images or videos as input, with the goal of automating operations that the human visual system can perform. It employs a variety of techniques, including Image Processing.
+
+**Image processing** is the science of enhancing photographs by adjusting a variety of parameters and attributes. As a result, Image Processing is considered a subset of Computer Vision. In this case, transformations are made to an input image, and the resulting image is returned. Sharpening, smoothing, stretching, and other changes are examples of these transformations.
+
+Both of the fields is working with visuals, i.e., images and videos. In fact, although it is not very accurate, we can say that if you use artificial intelligence algorithms and image processing methods in a project, that project is probably turning into a Computer Vision project. So Computer Vision is an intersection of Artificial Intelligence and Image Processing that usually aims to simulate intelligent human abilities.
+
+![Vision Based Control (1)](https://user-images.githubusercontent.com/22428774/172245057-e60fd3ef-86ca-4af5-b209-4012fa6363ee.png)
+
+|Image Processing|Computer Vision|
+|-----|--------|
+|Image processing is mainly focused on processing the raw input images to enhance them or preparing them to do other tasks|Computer vision is focused on extracting information from the input images or videos to have a proper understanding of them to predict the visual input like human brain.       |
+|Image processing uses methods like Anisotropic diffusion, Hidden Markov models, Independent component analysis, Different Filtering etc.|Image processing is one of the methods that is used for computer vision along with other Machine learning techniques, CNN etc.      |
+|Image Processing is a subset of Computer Vision.|Computer Vision is a superset of Image Processing.       |
+|Examples of some Image Processing applications are- Rescaling image (Digital Zoom), Correcting illumination, Changing tones etc.|Examples of some Computer Vision applications are- Object detection, Face detection, Hand writing recognition etc.       |
+
 ## Deep Neural Networks
 pass
 ###  Pytorch
@@ -268,3 +296,4 @@ pass
 - [1] - https://peakup.org/blog/yeni-baslayanlar-icin-goruntu-islemeye-giris/
 - [2] - https://yapayzeka.itu.edu.tr/arastirma/bilgisayarla-goru
 - [3] - VBM686 – Computer Vision Pinar Duygulu Hacettepe University Lecture Notes
+- [4] - O’Mahony, N.; Campbell, S.; Carvalho, A.; Harapanahalli, S.; Velasco-Hernandez, G.; Krpalkova, L.; Riordan, D.; Walsh, J. Deep Learning vs. Traditional Computer Vision. arXiv 2019, arXiv:1910.13796.
