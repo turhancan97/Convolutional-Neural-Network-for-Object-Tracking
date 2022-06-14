@@ -130,7 +130,33 @@ Both of the fields is working with visuals, i.e., images and videos. In fact, al
 |Examples of some Image Processing applications are- Rescaling image (Digital Zoom), Correcting illumination, Changing tones etc.|Examples of some Computer Vision applications are- Object detection, Face detection, Hand writing recognition etc.       |
 
 ## Deep Neural Networks
-pass
+
+Deep neural networks are a field of research in which researchers show great interest under the science of artificial intelligence. It covers studies on learning computers. In this section, firstly, a general introduction to artificial intelligence will be given, then deep neural networks will be examined, and then the most widely used deep learning frameworks will be examined.
+
+Computers and computer systems have become an indispensable part of life in the contemporary world. Many devices, from mobile phones to refrigerators in kitchens, work with computer systems. It has become commonplace to use computers in almost every field, from the business world to public affairs, from environmental and health organizations to military systems. When the development of technology is followed, it is seen that computers, which were previously developed only for electronic data transfer and performing complex calculations, gain qualifications that can filter and summarize large amounts of data over time and make comments about events using existing information. Today, computers can both make decisions about events and learn the relationships between events. 
+
+Problems that cannot be formulated mathematically and cannot be solved can be solved by computers using heuristic methods. Studies that equip computers with these features and enable them to develop these abilities are known as "artificial intelligence" studies. Artificial intelligence, in its simplest definition, is the general name of systems that try to imitate a certain part of human intelligence. From this point of view, when it comes to artificial intelligence, we should not think of systems that can completely imitate human intelligence or that have this purpose.
+
+Artificial intelligence can show itself in many different areas: Systems that predict what we write in our daily life, the search engine that allows us to search for an image on Google, Youtube's video recommendation system, and Instagram, which is very curious about how it once worked, is frequently ranked by those who see the story. are the examples we encountered.
+
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/173669486-c2a73b96-b520-4099-93d8-b3c95dd8aec8.png)
+
+Deep learning, a sub-branch of Artificial Intelligence, is simply the name we give to training multi-layer artificial neural networks (Multi Layer Artificial Neural Networks) with an algorithm called "backpropagation". Even these two concepts are broad concepts that can be explained by books on their own. Artificial neural networks (ANNs), which are used in deep learning, are computer software that perform basic functions such as learning, remembering, and generating new data from the data it collects by imitating the learning path of the human brain. Artificial neural networks, inspired by the human brain, emerged as a result of the mathematical modeling of the learning process.
+
+Biological neuron and artificial neural network simulations are given in Figure 5. Biological Nervous system elements and their equivalents in the artificial nervous system are given in table below. Here, the biological nervous system is divided into parts and each element is given an equivalent in the artificial neural network system.
+
+|Biological Neuron System|Artificial NeuronSystem|
+|-----|--------|
+|Neuron|Processor Element|
+|Dendrite| Aggregation Function|
+|Cell Body|Transfer Function|
+|Axons|Artificial Neuron Output|
+|Synapses|Weights|
+
+As seen in below gift, dog and cat data enters the network. The data processed in the middle layers is sent from there to the output layer. In short, this process is the conversion of incoming information to the output using the weight values of the network. In order for the network to produce the correct outputs for the inputs, the weights must have the correct values. 
+![212a609564e5e4f0403ab4c671a4f80d](https://user-images.githubusercontent.com/22428774/173663632-cfac59b0-2bdf-41c7-9fca-93a5471f98c3.gif)
+
+If you want to get more detailed information about artificial neural networks, [you can click on this link](https://github.com/turhancan97/Neural-Network-Training-on-Matlab). Let's take a look at the most widely used deep learning frameworks.
 ###  Pytorch
 pass
 ### Tensorflow and Keras
@@ -297,3 +323,4 @@ pass
 - [2] - https://yapayzeka.itu.edu.tr/arastirma/bilgisayarla-goru
 - [3] - VBM686 – Computer Vision Pinar Duygulu Hacettepe University Lecture Notes
 - [4] - O’Mahony, N.; Campbell, S.; Carvalho, A.; Harapanahalli, S.; Velasco-Hernandez, G.; Krpalkova, L.; Riordan, D.; Walsh, J. Deep Learning vs. Traditional Computer Vision. arXiv 2019, arXiv:1910.13796.
+- [5] - https://towardsdatascience.com/the-differences-between-artificial-and-biological-neural-networks-a8b46db828b7
