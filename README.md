@@ -158,11 +158,29 @@ As seen in below gift, dog and cat data enters the network. The data processed i
 
 If you want to get more detailed information about artificial neural networks, [you can click on this link](https://github.com/turhancan97/Neural-Network-Training-on-Matlab). Let's take a look at the most widely used deep learning frameworks.
 ###  Pytorch
-pass
+PyTorch is an optimized tensor library for deep learning using GPUs and CPUs.
+![Vision Based Control (2)](https://user-images.githubusercontent.com/22428774/173850692-bdb077cb-295c-493c-a1e0-eda0e5ff2fb6.png)
+PyTorch was published by Facebook in 2017 as a Python-based and open-source machine learning library connected to Torch. There is also a C/C++ interface. It offers a faster experience by using graphics processing units. This makes it superior and preferable to other libraries. It is preferred because it is more compatible with the structure we call Pythonic, that is, with various libraries in Python (numpy…). It is also easy and simple to understand. It does not act on a single Back-End. It offers different models for GPUs. What we call Back-End is the name given to the server in the background and the work of developing the base software. It uses dynamic computational graphics. The advantage of dynamic computational graphs lies in their ability to adapt to varying amounts in the input data.
 ### Tensorflow and Keras
-pass
+Keras is a deep learning library for Python used in machine learning. The biggest advantage of Keras is that it can run on libraries such as TensorFlow, Theano. It is ideal for beginners as it is easily and quickly accessible. It can run on CPU and GPU. You can choose whatever you want to save time. It supports convolutional neural networks (CNN) and iterative neural networks (RNN). There are quite a lot of resources on the internet because large companies have so many users, so when faced with a problem, the solution becomes simpler. TensorFlow is likewise an open source deep learning library. It can be used on CPU and GPU. Although it is based on Python, it supports multiple languages (C++, Java, C#, Javascript, R…).
+
+![Vision Based Control (3)](https://user-images.githubusercontent.com/22428774/173852425-70c98751-6c90-4a09-be30-e486faa39132.png)
+
 ### FastAi
-pass
+fastai is a deep learning library which provides practitioners with high-level components that can quickly and easily provide state-of-the-art results in standard deep learning domains, and provides researchers with low-level components that can be mixed and matched to build new approaches. It aims to do both things without substantial compromises in ease of use, flexibility, or performance. This is possible thanks to a carefully layered architecture, which expresses common underlying patterns of many deep learning and data processing techniques in terms of decoupled abstractions. These abstractions can be expressed concisely and clearly by leveraging the dynamism of the underlying Python language and the flexibility of the PyTorch library. fastai includes:
+
+-   A new type dispatch system for Python along with a semantic type hierarchy for tensors
+-   A GPU-optimized computer vision library which can be extended in pure Python
+-   An optimizer which refactors out the common functionality of modern optimizers into two basic pieces, allowing optimization algorithms to be implemented in 4–5 lines of code
+-   A novel 2-way callback system that can access any part of the data, model, or optimizer and change it at any point during training
+-   A new data block API
+-   And much more...
+
+fastai is organized around two main design goals: to be approachable and rapidly productive, while also being deeply hackable and configurable. It is built on top of a hierarchy of lower-level APIs which provide composable building blocks. This way, a user wanting to rewrite part of the high-level API or add particular behavior to suit their needs does not have to learn how to use the lowest level.
+
+![Vision Based Control (4)](https://user-images.githubusercontent.com/22428774/173853986-258ea796-37c1-4d1f-bd73-85272a1f6609.png)
+
+
 ## Convolutional Neural Networks
 pass
 ###  R-CNN
@@ -324,3 +342,6 @@ pass
 - [3] - VBM686 – Computer Vision Pinar Duygulu Hacettepe University Lecture Notes
 - [4] - O’Mahony, N.; Campbell, S.; Carvalho, A.; Harapanahalli, S.; Velasco-Hernandez, G.; Krpalkova, L.; Riordan, D.; Walsh, J. Deep Learning vs. Traditional Computer Vision. arXiv 2019, arXiv:1910.13796.
 - [5] - https://towardsdatascience.com/the-differences-between-artificial-and-biological-neural-networks-a8b46db828b7
+- [6] - https://pytorch.org/
+- [7] - https://keras.io/
+- [8] - https://docs.fast.ai/
