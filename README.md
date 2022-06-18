@@ -182,9 +182,80 @@ fastai is organized around two main design goals: to be approachable and rapidly
 
 
 ## Convolutional Neural Networks
-pass
+Convolutional neural networks take pictures or videos as input due to their structure. Of course, when taking pictures, they must be translated into the relevant format. For example, if we are giving a picture to a convolutional neural network, we need to export it in matrix format. 
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/174436863-f08d9250-ee08-4016-b15d-841bb138c407.png)
+We see 32x32 and 5x5 matrices in Figure 9. The 3 next to them indicate the RGB value, that is, it is colored. (It is 1 in black and white) Thanks to the filter we apply to the matrix, data is obtained from the picture by comparing certain features on the picture. Let's now go deeper in CNN. 
+
+The symmetry of the filter to be applied to the two-dimensional information is taken according to the x and y axes. All values are multiplied element by element in the matrix and the sum of all values is recorded as the corresponding element of the output matrix. This is also called a cross-correlation relationship. This can be done simply when the input data (eg, image) is single-channel. However, the input data can be in different formats and number of channels.
+![Vision Based Control (1)](https://user-images.githubusercontent.com/22428774/174437587-4962f880-231c-49d9-a4ac-3d54d3e88985.png)
+
+Color images consist of Red-Green-Blue (RGB) 3 channels. In this condition, the convolution operation is done for 3 channels. The channel number of the output signal is also calculated equally with the applied filter channel/number.
+
+Let's imagine this computation process as a layer in a neural network. The input image and the filter are actually a matrix of weights that are constantly updated by backpropagation. A scalar b (bias) value is added last to the output matrix to which the activation function is applied. You can examine the convolution process flow from the image below.
+![1_qtinjiZct2w7Dr4XoFixnA](https://user-images.githubusercontent.com/22428774/174437641-ec9d9027-128a-404c-ab90-feabe1844fb7.gif)
+#### Finding Edge
+Edge information is one of the most needed features from the image. It represents the high frequency regions of the input information. Two filters, vertical and horizontal, are used separately to obtain these attributes. In traditional methods - filters such as Sobel, Prewitt, Gabor - the filter is subject to a 'convolution' operation on the image. The resulting output shows the edge information of the image.
+![Vision Based Control (2)](https://user-images.githubusercontent.com/22428774/174437869-3fdebdcc-282a-4f8e-b262-72b96f36870b.png)
+
+With different edge detection filters, angular edges, transitions from dark to light, and from light to dark are evaluated and calculated separately as an attribute. Generally, edges are computed in the first layers of a convolutional network model. While making all these calculations, there is a difference between the input size and the output size. For example; In case the input image (n): 6x6, edge detection filter (f): 3x3, the output image obtained as a result of the convolution operation becomes: (n-f+1)x(n-f+1)=4x4 dimensional. If it is not desired to reduce the size in this way - if the input and output sizes are desired to be equal - what should be done?
+
+#### Padding
+It is a computation at our disposal to manage the size difference between the input sign and the exit sign after the convolution operation. This is achieved by adding extra pixels to the input matrix.
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/174437956-e55678f0-3853-4087-916c-49b24ee2d4b4.gif)
+
+This is exactly the job of adding pixels (padding) is called. In case the input matrix is nxn, filter (weight) matrix (fxf), if the output matrix is desired to be the same size as the input;
+
+The formula (n+2p-f+1)x(n+2p-f+1) is applied.
+
+Here, the value indicated by 'p' is the pixel size added to the input matrix, that is, the padding value. To determine this, the equation p=(f-1)/2 is used.
+![Vision Based Control (1)](https://user-images.githubusercontent.com/22428774/174438027-19dbbcb0-05ea-4b31-8d60-c600b8ead888.gif)
+
+#### Stride
+This value informs that for the convolution operation, the filter, which is the weight matrix, will shift on the image in one-pixel steps or larger steps. This is another parameter that directly affects the output size.
+![image](https://user-images.githubusercontent.com/22428774/174438060-9d8b488c-fd2b-438d-8e54-2e563b2f2011.png)
+For example, when the padding value is p=1 and the number of steps is s=2, the size of the output matrix
+
+(((n+2p-f)/s)+1)x(((n+2p-f)/s)+1);
+
+If it is calculated for n=5 and f=3 values, the output size will be (3)x(3). Pixels added in the padding operation can consist of zeros, as in the example below. Another implementation is to copy the value of the next pixel.
+![Vision Based Control (3)](https://user-images.githubusercontent.com/22428774/174438125-2360bad0-7acd-41b0-abd8-670afb81fbed.png)
+#### Pooling
+In this layer, the maximum pooling method is generally used. There are no learned parameters in this layer of the network. It reduces the height and width information by keeping the number of channels of the input matrix constant. It is a step used to reduce computational complexity. However, according to Hinton's capsule theory, it compromises performance as it causes some important information in the data to be lost.
+![Vision Based Control (4)](https://user-images.githubusercontent.com/22428774/174438249-ada82890-914d-4fa6-ad82-64e32b1f7cb8.png)
+
+It gives very good results, especially in problems where location information is not very important. Outputs the largest of the pixels within the selected jointing size. In the example on the right, 2x2 max-commoning is applied by shifting it by 2 steps (pixels). The largest value in the field with the 4 related elements is transferred to the output. At the output, a 1 in 4 dimensional data is obtained.
+
+#### Common Networks
+We now know the operations performed in the context of a convolutional network. So how is the model created? The easiest answer to this question is to examine classical network models.
+
+**LeNet-5**: It is the convolutional neural network model that was published in 1998 and gave the first successful result. It was developed by Yann LeCun and his team to read numbers on postal numbers, bank checks. Experiments are shown on the MNIST (Modified National Institute of Standards and Technology) dataset. In this model, unlike other models that will be developed later, average pooling is performed instead of max-pooling in size reduction steps. In addition, sigmoid and hyperbolic tangent are used as activation functions.
+![Vision Based Control (2)](https://user-images.githubusercontent.com/22428774/174438409-6af1d5bc-77c2-4ae8-8d0c-83fd642520fa.gif)
+The number of parameters entering the FC (Fully Connected) layer is 5x5x16=400 and there is a softmax with 10 classes because it classifies the numbers between 0 and 9 at the y output. In this network model, 60 thousand parameters are calculated. While the height and width information of the matrix decreases along the network, the depth (number of channels) value increases.
+
+**AlexNet**: It is the first study that made convolutional neural network models and deep learning popular again in 2012. It was developed by Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton. It is basically very similar to the LeNet model in that it has successive layers of convolution and pooling. ReLU (Rectified Linear Unit) is used as an activation function, and max-pooling is used in pooling layers.
+![Vision Based Control (5)](https://user-images.githubusercontent.com/22428774/174438954-105dd745-fee0-4c0a-b6a9-b4665ad46bf1.png)
+This larger and deeper network model is a two-part model on a parallel dual GPU (Graphics Processing Unit). Approximately 60 million parameters are calculated. It is a breaking point in the image classification problem, providing a spike in classification accuracy from 74.3% to 83.6% in the ImageNet ILSVRC competition.
+
+**VGG-16**: It is a simple network model and the most important difference from the previous models is the use of convolution layers in 2 or 3 layers. It is converted into a feature vector with 7x7x512=4096 neurons in the full link (FC) layer. The 1000 class softmax performance is calculated at the output of the two FC layers. Approximately 138 million parameters are calculated. As in other models, while the height and width dimensions of the matrices decrease from the input to the output, the depth value (number of channels) increases.
+![Vision Based Control (6)](https://user-images.githubusercontent.com/22428774/174439082-c4d86fc7-cc97-495b-8a22-d35ffcc66bfe.png)
+At each convolution layer output of the model, filters with different weights are calculated, and as the number of layers increases, the features formed in the filters represent the 'depths' of the image.
+**Other Common Network Architectures**:
+1. **GoogLeNet** - 2014 ILSVRC winner, changing the network architecture and reducing the number of parameters (**4 million** instead of 60 milion in AlexNet)
+2. **ResNet-50** - ResNet is one of the early adopters of batch normalisation (the batch norm paper authored by Ioffe and Szegedy was submitted to ICML in 2015) with **26M** parameters.
+3. **Inception-v1** - (2014) 22-layer architecture with **5M** parameters
+4. **Xception** - It is an adaptation from Inception, where the Inception modules have been replaced with depthwise separable convolutions. It has also roughly the same number of parameters as Inception-v1.
+
+Now let's look at object recognition algorithms using convolutional neural networks!!!
 ###  R-CNN
-pass
+Object detection is a term related to computer vision and image processing that deals with detecting objects of a particular class (such as people, buildings or cars) in digital images and videos. More detailed explanation will be given in the following sections. Let's dive into R-CNN algorithm.
+![Vision Based Control (7)](https://user-images.githubusercontent.com/22428774/174440130-2a31a648-5039-462f-83ba-9dd2939c9919.png)
+R-CNN architecture has been developed because the CNN algorithm is not easily sufficient for images with multiple objects. The R-CNN algorithm uses the selective search algorithm that produces approximately 2000 possible regions where the object is likely to be found, and applies the CNN (ConvNet) algorithm to each region in turn. The size of the regions is determined and the correct region is placed in the neural network. A selective search algorithm is an algorithm that combines regions that are divided into smaller segments to generate a region recommendation.
+
+**Problems with R-CNN:**
+* Since each region in the image applies CNN separately, the training time is quite long and the prediction time is also long, so it takes a lot of time.
+* A lot of disk space is required.
+* The cost is high.
+
 ### Fast R-CNN
 pass
 ### Faster R-CNN
@@ -345,3 +416,4 @@ pass
 - [6] - https://pytorch.org/
 - [7] - https://keras.io/
 - [8] - https://docs.fast.ai/
+- [9] - https://www.coursera.org/specializations/deep-learning
