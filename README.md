@@ -315,25 +315,72 @@ Region-based object detection algorithms such as R-CNN first determine the areas
 ![Vision Based Control (15)](https://user-images.githubusercontent.com/22428774/174443298-6e74a3fc-6c0a-48fe-9268-5fb057224b97.png)
 
 # Object Detection
+Object detection is a computer technology that deals with finding instances of semantic items of a specific class (such as individuals, buildings, or cars) in digital photos and videos. It is related to computer vision and image processing. Face detection and pedestrian detection are two well-studied object detection areas. Object detection can be used in a variety of computer vision applications, such as picture retrieval and video surveillance [11]. 
 
-pass
+It's used for picture annotation, vehicle counting, activity recognition, face detection, face recognition, and video object co-segmentation, among other things. It's also used to track things, such as a ball during a football game, a cricket bat's movement, or a person in a film.
+
+![Vision Based Control (16)](https://user-images.githubusercontent.com/22428774/174497589-3554f31e-b35d-4d9f-a999-bfc73ee5451d.png)
+
+
+Every object class has its own unique characteristics that aid in classification - for example, all circles are round. These particular properties are used in object class detection. When looking for circles, for example, items at a specific distance from a point (i.e. the center) are sought. Similarly, objects that are perpendicular at corners and have equal side lengths are required while seeking for squares. Face identification uses a similar approach, with traits such as skin color and eye distance being detected along with the eyes, nose, and lips.
+
+Object detection methods are classified as either neural network-based or non-neural approaches. Non-neural approaches require first defining features using one of the methods below, followed by classification using a technique such as support vector machine (SVM). On the other hand, neural approaches, which are often based on convolutional neural networks (CNN) , are capable of doing end-to-end object detection without specifying characteristics .
+
+-   Non-neural approaches:
+    -   [Viola–Jones object detection framework](https://en.wikipedia.org/wiki/Viola%E2%80%93Jones_object_detection_framework "Viola–Jones object detection framework")  based on  [Haar features](https://en.wikipedia.org/wiki/Haar-like_feature "Haar-like feature")
+    -   [Scale-invariant feature transform (SIFT)](https://en.wikipedia.org/wiki/Scale-invariant_feature_transform "Scale-invariant feature transform")
+    -   [Histogram of oriented gradients (HOG)](https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients "Histogram of oriented gradients")  features
+-   Neural network approaches:
+    -   [Region Proposals](https://en.wikipedia.org/wiki/Region_Based_Convolutional_Neural_Networks "Region Based Convolutional Neural Networks")  (R-CNN, Fast R-CNN, Faster R-CNN, cascade R-CNN).
+    -   Single Shot MultiBox Detector (SSD)
+    -   You Only Look Once (YOLO) 
+    -   Single-Shot Refinement Neural Network for Object Detection (RefineDet)
+    -   Retina-Net 
+    -   Deformable convolutional networks
 
 ## Example Detection
-pass
-# Object Recognition
+a.  Automatic detection of earthquake-induced ground failure effects through Faster R-CNN deep learning-based object detection using satellite images [12].
+b.  Optical Braille Recognition Using Object Detection CNN [13].
+![29](https://user-images.githubusercontent.com/22428774/174498583-d0a4e1a2-f053-430e-98f6-b518073548e2.png)
 
-pass
+c. A deep learning method to detect foreign objects for inspecting power transmission lines [14].
+d. Automatic Pass Annotation from Soccer VideoStreams Based on Object Detection and LSTM [15].
+![30](https://user-images.githubusercontent.com/22428774/174498582-af411a5e-8a65-4602-a6e7-968a86402c35.png)
+# Object Recognition
+Object recognition is a very popular computer vision technique used to detect as well as classify objects in images or videos. In short, this method includes object detection and classification.
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/174615052-806b1cda-bb0e-47b3-9f09-84138288b738.png)
 
 
 ## Example Recognition
+a. Defect Detection (Manufacturing)
+b. Radiological imaging diagnostics
+c. Face recognition to identify and verify
 
 # Object Tracking
+It is aimed to follow the moving objects in the video and to obtain information such as location, speed or direction.
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/174629597-e3acba97-6812-4482-85e1-5494521d4bff.gif)
+Although people in videos are usually followed, animals or cars can also be followed. In order to carry out object tracking, object detection must be done first. Many different methods are used in object detection, such as subtracting two consecutive images from each other and detecting a moving object. Usually, after the objects in the image are detected, they are placed in a box and each box is assigned a number that has not been used before. Objects are tracked by these numbers.
 
-pass
+**Some challenges in object tracking:**
+
+* Unexpected disappearance of the tracked object.
+* The tracked object then goes behind another object and is not visible.
+* Detecting which is which when two objects intersect each other
+* Detection of the same object even if the same object looks different due to the movement of the camera or the object itself.
+* Objects can look very different from different perspectives and we need to consistently describe the same object from all perspectives.
+* Objects in a video can change scale significantly, for example due to camera zoom. In this case, we need to recognize the same object.
+* Light changes in video can have a huge impact on how objects appear and make it difficult to detect them consistently.
 
 ## Example Tracking
+a. Surveillance
+b. Traffic flow monitoring
+c. Autonomous Vehicles
+d. Human activity recognition
+e. Sports analytics
+f. Human counting
 
-pass
+![self-driving-tesla](https://user-images.githubusercontent.com/22428774/174631741-8fef2e53-bdcb-4ecd-b8d9-a5f02849b528.gif)
+
 
 # Project List
 
@@ -467,3 +514,9 @@ pass
 - [8] - https://docs.fast.ai/
 - [9] - https://www.coursera.org/specializations/deep-learning
 - [10] - Ceren Gulra Melek, Elena Battini Sonmez, and Songul Albayrak, “Object Detection in Shelf Images with YOLO” 978-1-5386-9301-8/19/$31.00 ©2019 IEEE, 2019, doi: 10.1109/EUROCON.2019.8861817
+- [11] - https://en.wikipedia.org/wiki/Object_detection
+- [12] - Hacıefendioğlu, K., Başağa, H.B. & Demir, G. Automatic detection of earthquake-induced ground failure effects through Faster R-CNN deep learning-based object detection using satellite images. Nat Hazards 105, 383–403 (2021). https://doi.org/10.1007/s11069-020-04315-y
+- [13] - Ovodov, I. G. (2020). Optical Braille Recognition Using Object Detection CNN. ArXiv:2012.12412.
+- [14] - J. Zhu et al., "A Deep Learning Method to Detect Foreign Objects for Inspecting Power Transmission Lines," in IEEE Access, vol. 8, pp. 94065-94075, 2020, doi: 10.1109/ACCESS.2020.2995608.
+- [15] - Danilo Sorano, Fabio Carrara, Paolo Cintia, Fabrizio Falchi, and Luca Pappalardo. Automatic pass annotation from soccer videostreams based on object detection and lstm. arXiv preprint arXiv:2007.06475, 2020.
+- [16] - https://www.mathworks.com/solutions/image-video-processing/object-recognition.html
