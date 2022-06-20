@@ -339,12 +339,12 @@ Object detection methods are classified as either neural network-based or non-ne
     -   Deformable convolutional networks
 
 ## Example Detection
-a.  Automatic detection of earthquake-induced ground failure effects through Faster R-CNN deep learning-based object detection using satellite images [12].
-b.  Optical Braille Recognition Using Object Detection CNN [13].
+- a.  Automatic detection of earthquake-induced ground failure effects through Faster R-CNN deep learning-based object detection using satellite images [12].
+- b.  Optical Braille Recognition Using Object Detection CNN [13].
 ![29](https://user-images.githubusercontent.com/22428774/174498583-d0a4e1a2-f053-430e-98f6-b518073548e2.png)
 
-c. A deep learning method to detect foreign objects for inspecting power transmission lines [14].
-d. Automatic Pass Annotation from Soccer VideoStreams Based on Object Detection and LSTM [15].
+- c. A deep learning method to detect foreign objects for inspecting power transmission lines [14].
+- d. Automatic Pass Annotation from Soccer VideoStreams Based on Object Detection and LSTM [15].
 ![30](https://user-images.githubusercontent.com/22428774/174498582-af411a5e-8a65-4602-a6e7-968a86402c35.png)
 # Object Recognition
 Object recognition is a very popular computer vision technique used to detect as well as classify objects in images or videos. In short, this method includes object detection and classification.
@@ -352,9 +352,12 @@ Object recognition is a very popular computer vision technique used to detect as
 
 
 ## Example Recognition
-a. Defect Detection (Manufacturing)
-b. Radiological imaging diagnostics
-c. Face recognition to identify and verify
+- a. Defect Detection (Manufacturing)
+- b. Radiological imaging diagnostics
+- c. Face recognition to identify and verify
+![33](https://user-images.githubusercontent.com/22428774/174638174-429ec199-5da3-42ae-aac1-a8a528bad38a.png)
+
+![34](https://user-images.githubusercontent.com/22428774/174638169-3f82c980-deef-4282-a5de-b9db58a76e6d.png)
 
 # Object Tracking
 It is aimed to follow the moving objects in the video and to obtain information such as location, speed or direction.
@@ -372,12 +375,12 @@ Although people in videos are usually followed, animals or cars can also be foll
 * Light changes in video can have a huge impact on how objects appear and make it difficult to detect them consistently.
 
 ## Example Tracking
-a. Surveillance
-b. Traffic flow monitoring
-c. Autonomous Vehicles
-d. Human activity recognition
-e. Sports analytics
-f. Human counting
+- a. Surveillance
+- b. Traffic flow monitoring
+- c. Autonomous Vehicles
+- d. Human activity recognition
+- e. Sports analytics
+- f. Human counting
 
 ![self-driving-tesla](https://user-images.githubusercontent.com/22428774/174631741-8fef2e53-bdcb-4ecd-b8d9-a5f02849b528.gif)
 
