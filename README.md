@@ -614,9 +614,9 @@ cap.release()
 ```
 
 ## MNIST Image Classification with Deep Neural Network
-pass
+[Click Here for Detailed Information](https://github.com/turhancan97/Convolutional-Neural-Network-for-Object-Tracking/blob/main/MNIST%20-%20DeepNN/deep-neural-network-mnist.ipynb)
 ## MNIST Image Classification with Convolutional Neural Network
-pass
+[Click Here for Detailed Information](https://github.com/turhancan97/Convolutional-Neural-Network-for-Object-Tracking/blob/main/MNIST%20-%20CNN/cnn-mnist.ipynb)
 ## Face Mask Detection for COVID19
 pass
 ## Object Detection and Tracking in Custom Datasets with Yolov4
