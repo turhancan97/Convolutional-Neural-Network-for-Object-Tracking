@@ -492,9 +492,127 @@ Finally, we wrote the code below to track the blue object with past data
         cv2.imshow("Original Detection",imgOriginal)
 ```
 ## Motion Detection and Tracking with OpenCV
-pass
+
+The goal here is to find contours, draw contours and run a motion detection and tracking algorithm by using contour information.
+
+The end product should look similar to the GIF below:
+
+![Vision Based Control (1)](https://user-images.githubusercontent.com/22428774/175003689-fdc7393f-be5a-4498-a9c8-11a3d4296de6.gif)
+
+
+We may quickly locate items in a picture by using contour detection to locate their borders. It frequently serves as the starting point for a variety of fascinating applications, including picture-foreground extraction, basic image segmentation, detection, and recognition [17].
+
+A contour is created by connecting every point along an object's boundaries. Typically, boundary pixels with the same color and intensity are referred to as a certain contour. Finding and drawing contours in images is quite simple with OpenCV. It does two straightforward tasks:
+
+1.  **`findContours()`**
+2.  **`drawContours()`**
+
+Also, it has two different algorithms for contour detection:
+
+1.  **`CHAIN_APPROX_SIMPLE`**
+2.  **`CHAIN_APPROX_NONE`**
+
+Firstly, we captured the video that we have in our folder. These videos contain some walking people in Poznan, Paris and Rome. You can import any video by writing the name of the city by `cap = cv2.VideoCapture('CITY_NAME.mp4')`. 
+
+```python
+print("Choose a City among Poznan, Paris or Rome")
+print("-------------------------------------------")
+cap = cv2.VideoCapture('paris.mp4') # Open the Video
+```
+Then, we want to read two frames from the capture. 
+
+```python
+out = cv2.VideoWriter("output.avi", fourcc, 5.0, (1280,720))
+ret, frame1 = cap.read() # We define two frame one after another
+ret, frame2 = cap.read()
+```
+
+We want to find the _area_ that has changed since the last frame, not each pixel. In order to do so, we first need to find an area. This is what `cv.findContours` does; it retrieves contours or outer limits from each white spot from the part above. In the code below we find and draw all contours. Also, by using this contour information, we draw the rectangle to the object which are moving.
+
+```python
+while cap.isOpened():
+    diff = cv2.absdiff(frame1, frame2) # To find out absolute difference of first frame and second frame
+    gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY) # convert it to gray scale - We do it for contour stages (It is easier to find contour with gray scale)
+    blur = cv2.GaussianBlur(gray, (5,5), 0) # Blur the grayscale frame
+    _, thresh = cv2.threshold(blur, 20, 255, cv2.THRESH_BINARY) # max threshold values is 255 - we need trashold value
+    dilated = cv2.dilate(thresh, None, iterations=5) 
+    contours, _ = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) # Find contour
+    for contour in contours:
+        (x, y, w, h) = cv2.boundingRect(contour)
+
+        if cv2.contourArea(contour) < 900:
+            continue
+        cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        cv2.putText(frame1, "Status: {}".format('Movement'), (10, 20), cv2.FONT_HERSHEY_SIMPLEX,
+                    1, (0, 0, 255), 3) # If something is moving in the video then we will see Status: Movement
+    #cv2.drawContours(frame1, contours, -1, (0, 255, 0), 2)
+    image = cv2.resize(frame1, (1280,720))
+    out.write(image)
+    cv2.imshow("feed", frame1)
+    frame1 = frame2
+    ret, frame2 = cap.read()
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+cv2.destroyAllWindows()
+cap.release()
+out.release()
+```
+
 ## Face and Eye Detection
-pass
+Paul Viola and Michael Jones in their study Rapid Object Detection using a Boosted Cascade of Simple Features [18] described an efficient object detection method that uses Haar feature-based cascade classifiers. We will detect face and eyes in this project by using Haar Cascade Classifiers.
+
+The end product should look similar to the GIF below:
+
+![Vision Based Control (2)](https://user-images.githubusercontent.com/22428774/175008837-14f84ac5-b7c1-46a0-a702-d179ceea1efa.gif)
+
+
+A cascade function is trained using a large number of both positive and negative images in this machine learning-based approach. The next step is to utilize it to find items in other pictures.
+
+Face and eye detection will be used in this instance. To train the classifier, the algorithm first requires a large number of both positive (pictures of faces (and eyes)) and negative (images without faces (and eyes)). After that, we must draw features from it. The Haar features in the image below are utilized for this. They are just like convolutional kernel. Each feature is a single value that is obtained by deducting the sum of the pixels under the white and black rectangles.
+
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/175005618-697eba20-b245-4d02-bc84-3980cb7a3e5b.png)
+
+At first we need to import pretrained models for face and eye detection so that we do not need to find a lot of photo with eyes, faces (positive) and without (negative). This will give us to save time. 
+
+In the following lines of the code we call these pretrained models by `face_cascade`, and `eye_cascade`. 
+```python
+import cv2
+
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye_tree_eyeglasses.xml')
+```
+
+Then we should choose video to capture (can be male or female). Next, we need to convert our image into grayscale because Haar cascades work only on gray images. So, we are going to detect faces and eyes in a grayscale images, but we will draw rectangles around the detected faces on the color images.
+
+In the first step we will detect the face. To extract coordinates of a rectangle that we are going to draw around the detected face, we need to create object faces. In this object we are going to store our detected faces. With a function `detectMultiScale()` we will obtain tuple of four elements: x and y are coordinates of a top left corner, and w and h are width and height of the rectangle. This method requires several arguments. First one is the gray image, the input image on which we will detect faces. Second argument is the scale factor which tells us how much the image size is reduced at each image scale. Third and last argument is the minimal number of neighbors. This parameter specifying how many neighbors each candidate rectangle should have to retain it.
+
+Later we detected the eyes. In order to do that, first we need to create two regions of interest Now we will detect the eyes. To detect the eyes, first we need to create two regions of interest which will be located inside the rectangle. We need first region for the gray image, where we going to detect the eyes, and second region will be used for the color image where we are going to draw rectangles.
+
+```python
+print("Enter Female Face or Male Face")
+cap = cv2.VideoCapture('female.mp4')
+
+while cap.isOpened():
+    _, img = cap.read()
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+
+    for (x, y , w ,h) in faces:
+        cv2.rectangle(img, (x,y), (x+w, y+h), (255, 0 , 0), 3)
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_color = img[y:y+h, x:x+w]
+        eyes = eye_cascade.detectMultiScale(roi_gray)
+        for (ex, ey ,ew, eh) in eyes:
+            cv2.rectangle(roi_color, (ex,ey), (ex+ew, ey+eh), (0, 255, 0), 5)
+
+    # Display the output
+    cv2.imshow('img', img)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+```
+
 ## MNIST Image Classification with Deep Neural Network
 pass
 ## MNIST Image Classification with Convolutional Neural Network
@@ -523,3 +641,5 @@ pass
 - [14] - J. Zhu et al., "A Deep Learning Method to Detect Foreign Objects for Inspecting Power Transmission Lines," in IEEE Access, vol. 8, pp. 94065-94075, 2020, doi: 10.1109/ACCESS.2020.2995608.
 - [15] - Danilo Sorano, Fabio Carrara, Paolo Cintia, Fabrizio Falchi, and Luca Pappalardo. Automatic pass annotation from soccer videostreams based on object detection and lstm. arXiv preprint arXiv:2007.06475, 2020.
 - [16] - https://www.mathworks.com/solutions/image-video-processing/object-recognition.html
+- [17] - https://learnopencv.com/contour-detection-using-opencv-python-c/
+- [18] - P. Viola and M. Jones, "Rapid object detection using a boosted cascade of simple features," _Proceedings of the 2001 IEEE Computer Society Conference on Computer Vision and Pattern Recognition. CVPR 2001_, 2001, pp. I-I, doi: 10.1109/CVPR.2001.990517.
