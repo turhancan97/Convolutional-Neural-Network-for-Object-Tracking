@@ -38,6 +38,7 @@ The project we prepared for the **Vision-based Control** lecture, which is one o
 	* [MNIST Image Classification with Deep Neural Network](#mnist-image-classification-with-deep-neural-network)
 	* [MNIST Image Classification with Convolutional Neural Network](#mnist-image-classification-with-convolutional-neural-network)
 	* [Face Mask Detection for COVID19 with OpenCV, Tensorflow 2 and Keras](#face-mask-detection-for-covid19)
+	* [Real Time Digit Classification](#real-time-digit-classification)
 	* [Object Detection and Tracking in Custom Datasets with Yolov4](#object-detection-and-tracking-in-custom-datasets-with-yolov4)
 * [Future Work](#future-work)
 * [References](#references)
@@ -619,6 +620,140 @@ cap.release()
 [Click Here for Detailed Information](https://github.com/turhancan97/Convolutional-Neural-Network-for-Object-Tracking/blob/main/MNIST%20-%20CNN/cnn-mnist.ipynb)
 ## Face Mask Detection for COVID19
 pass
+## Real Time Digit Classification
+In this project, it is aimed to create a Convolutional Neural Network to classify the digits from 0 to 9. Approximately 10000 images from 10 different classes are trained in the training code. A test script was then created for use with a webcam.
+
+The end product should look similar to the GIF below:
+
+Let's dive into the codes:
+
+- `train_cnn.py`:
+
+The code below is for reading the images as well as the labels. 
+```python
+path = "digits_data"
+myList = os.listdir(path)
+noOfClasses = len(myList)
+print("Number of Label/Class: ",noOfClasses)
+images = []
+classNo = []
+#### IMPORTING DATA/IMAGES FROM FOLDERS 
+for i in range(noOfClasses):
+    myImageList = os.listdir(path + "\\"+str(i))
+    for j in myImageList:
+        img = cv2.imread(path + "\\" + str(i) + "\\" + j)
+        img = cv2.resize(img, (32,32))
+        images.append(img)
+        classNo.append(i)
+```
+Then we split our dataset into train, test and validation.
+```python
+x_train, x_test, y_train, y_test = train_test_split(images, classNo, test_size = 0.3, random_state = 42)
+x_train, x_validation, y_train, y_validation = train_test_split(x_train, y_train, test_size = 0.2, random_state = 42)
+```
+
+We can see the distribution of the test, train and validation via code below.
+```python
+fig, axes = plt.subplots(3,1,figsize=(7,7))
+fig.subplots_adjust(hspace = 0.5)
+sns.countplot(y_train, ax = axes[0])
+axes[0].set_title("y_train")
+
+sns.countplot(y_test, ax = axes[1])
+axes[1].set_title("y_test")
+
+sns.countplot(y_validation, ax = axes[2])
+axes[2].set_title("y_validation")
+```
+![image](https://user-images.githubusercontent.com/22428774/175040892-22e83811-875e-4e41-affa-4468135cc436.png)
+
+Next, preprocessing function needs to be created to properly train our images with CNN.
+```python
+def preProcess(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = cv2.equalizeHist(img)
+    img = img /255
+    return img
+```
+
+Later, we reshape your images and apply data augmentation for creating more variety of data, which helps us to learn better.
+```python
+x_train = x_train.reshape(-1,32,32,1)
+print(x_train.shape)
+x_test = x_test.reshape(-1,32,32,1)
+x_validation = x_validation.reshape(-1,32,32,1)
+
+dataGen = ImageDataGenerator(width_shift_range = 0.08,
+                             height_shift_range = 0.08,
+                             zoom_range = 0.08,
+                             rotation_range = 8)
+
+dataGen.fit(x_train)
+```
+Before training the model, output variable should be implemented one hot encoding and then we can create model and apply CNN algorithm.  Finally, we save our model for further real time classification.
+```python
+y_train = to_categorical(y_train, noOfClasses)
+y_test = to_categorical(y_test, noOfClasses)
+y_validation = to_categorical(y_validation, noOfClasses)
+
+model = Sequential()
+model.add(Conv2D(input_shape = (32,32,1), filters = 8, kernel_size = (5,5), activation = "relu", padding = "same"))
+model.add(MaxPooling2D(pool_size = (2,2)))
+
+model.add(Conv2D( filters = 16, kernel_size = (3,3), activation = "relu", padding = "same"))
+model.add(MaxPooling2D(pool_size = (2,2)))
+
+model.add(Dropout(0.2))
+model.add(Flatten())
+model.add(Dense(units=256, activation = "relu" ))
+model.add(Dropout(0.2))
+model.add(Dense(units=noOfClasses, activation = "softmax" ))
+
+model.compile(loss = "categorical_crossentropy", optimizer=("Adam"), metrics = ["accuracy"])
+
+batch_size = 64
+
+hist = model.fit_generator(dataGen.flow(x_train, y_train, batch_size = batch_size), 
+                                        validation_data = (x_validation, y_validation),
+                                        epochs = 30,steps_per_epoch = x_train.shape[0]//batch_size, shuffle = 1)
+
+model_json = model.to_json()
+with open("model.json", "w") as json_file:
+    json_file.write(model_json)
+# serialize weights to HDF5
+model.save_weights("model_trained.h5")
+print("Saved model to disk")
+```
+Finally, we plot our results and see confusiton matrix.
+```python
+plt.figure()
+plt.plot(hist.history["loss"], label = "Train Loss")
+plt.plot(hist.history["val_loss"], label = "Validation Loss")
+plt.legend()
+plt.show()
+
+plt.figure()
+plt.plot(hist.history["accuracy"], label = "Train accuracy")
+plt.plot(hist.history["val_accuracy"], label = "Validation accuracy")
+plt.legend()
+plt.show()
+
+score = model.evaluate(x_test, y_test, verbose = 1)
+print("Test loss: ", score[0])
+print("Test accuracy: ", score[1])
+
+y_pred = model.predict(x_validation)
+y_pred_class = np.argmax(y_pred, axis = 1)
+Y_true = np.argmax(y_validation, axis = 1)
+cm = confusion_matrix(Y_true, y_pred_class)
+f, ax = plt.subplots(figsize=(8,8))
+sns.heatmap(cm, annot = True, linewidths = 0.01, cmap = "Greens", linecolor = "gray", fmt = ".1f", ax=ax)
+plt.xlabel("predicted")
+plt.ylabel("true")
+plt.title("cm")
+plt.show()
+
+```
 ## Object Detection and Tracking in Custom Datasets with Yolov4
 pass
 
