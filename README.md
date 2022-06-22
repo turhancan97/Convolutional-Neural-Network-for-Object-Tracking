@@ -624,6 +624,7 @@ pass
 In this project, it is aimed to create a Convolutional Neural Network to classify the digits from 0 to 9. Approximately 10000 images from 10 different classes are trained in the training code. A test script was then created for use with a webcam.
 
 The end product should look similar to the GIF below:
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/175058789-406d7cdd-9339-467a-978f-27648532fc66.gif)
 
 Let's dive into the codes:
 
@@ -752,7 +753,54 @@ plt.xlabel("predicted")
 plt.ylabel("true")
 plt.title("cm")
 plt.show()
+```
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/175045097-1c516ba7-2fff-4fb3-8ab1-7f47052abbe1.png)
+![Vision Based Control (1)](https://user-images.githubusercontent.com/22428774/175045423-0b7fac69-d9e2-4fc4-a036-ee64df0ef27a.png)
 
+- `video_capture.py`:
+
+The code below is for capturing the video, loading the saved model and classifiying the digit in real time.
+```python
+import cv2
+import numpy as np
+from tensorflow.keras.models import model_from_json
+
+#### PREPORCESSING FUNCTION
+def preProcess(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = cv2.equalizeHist(img)
+    img = img /255.0
+    return img
+
+#### CREATE CAMERA OBJECT
+cap = cv2.VideoCapture(0)
+cap.set(3,480)
+cap.set(4,480)
+
+### load json and create model
+json_file = open('model.json', 'r')
+loaded_model_json = json_file.read()
+json_file.close()
+model = model_from_json(loaded_model_json)
+### load weights into new model
+model.load_weights("model_trained.h5")
+print("Loaded model from disk")
+
+while True:    
+    success, frame = cap.read()
+    img = np.asarray(frame)
+    img = cv2.resize(img, (32,32))
+    img = preProcess(img)
+    img = img.reshape(1,32,32,1)
+    #### PREDICT
+    classIndex = int(model.predict_classes(img))
+    predictions = model.predict(img)
+    probVal = np.amax(predictions)
+    print(classIndex, probVal)
+    if probVal > 0.7:
+        cv2.putText(frame, str(classIndex)+ "   "+ str(probVal), (50,50),cv2.FONT_HERSHEY_DUPLEX, 1,(0,255,0),1)
+    cv2.imshow("Digit Classification",frame)
+    if cv2.waitKey(1) & 0xFF == ord("q"): break    
 ```
 ## Object Detection and Tracking in Custom Datasets with Yolov4
 pass
