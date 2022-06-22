@@ -8,7 +8,7 @@ import cv2
 print("Choose a City among Poznan, Paris or Rome")
 print("-------------------------------------------")
 
-cap = cv2.VideoCapture('rome.mp4') # Open the Video
+cap = cv2.VideoCapture('poznan.mp4') # Open the Video
 
 
 frame_width = int( cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -47,7 +47,7 @@ while cap.isOpened():
     frame1 = frame2
     ret, frame2 = cap.read()
 
-    if cv2.waitKey(40) == 27:
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 cv2.destroyAllWindows()
