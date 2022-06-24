@@ -1,12 +1,14 @@
+# Object Detection with Color
 import cv2
 import numpy as np
 from collections import deque
 
-# nesne merkezini depolayacak veri tipi
+# data type to store object center
 buffer_size = 16
 pts = deque(maxlen = buffer_size)
 
-# mavi renk aralığı HSV
+
+# blue color range HSV
 blueLower = (84,  98,  0)
 blueUpper = (179, 255, 255)
 
@@ -28,27 +30,27 @@ while True:
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
         cv2.imshow("HSV Image",hsv)
         
-        # mavi için maske oluştur
+        # create mask for blue
         mask = cv2.inRange(hsv, blueLower, blueUpper)
         cv2.imshow("mask Image",mask)
-        # maskenin etrafında kalan gürültüleri sil
+        # delete the noises around the mask
         mask = cv2.erode(mask, None, iterations = 3)
         mask = cv2.dilate(mask, None, iterations = 3)
         cv2.imshow("Mask + erozyon ve genisleme",mask)
         
-        # farklı sürüm için
+        # for different version
         # (_, contours,_) = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-        # kontur
+        # contours
         (contours,_) = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         center = None
 
         if len(contours) > 0:
             
-            # en buyuk konturu al
+            # take the biggest contour
             c = max(contours, key = cv2.contourArea)
             
-            # dikdörtgene çevir 
+            # convert to rectangle
             rect = cv2.minAreaRect(c)
             
             ((x,y), (width,height), rotation) = rect
@@ -56,7 +58,7 @@ while True:
             s = "x: {}, y: {}, width: {}, height: {}, rotation: {}".format(np.round(x),np.round(y),np.round(width),np.round(height),np.round(rotation))
             print(s)
             
-            # kutucuk
+            # Box
             box = cv2.boxPoints(rect)
             box = np.int64(box)
             
@@ -64,17 +66,17 @@ while True:
             M = cv2.moments(c)
             center = (int(M["m10"]/M["m00"]), int(M["m01"]/M["m00"]))
             
-            # konturu çizdir: sarı
+            # draw contour: yellow
             cv2.drawContours(imgOriginal, [box], 0, (0,255,255),2)
             
-            # merkere bir tane nokta çizelim: pembe
+            # let's draw a dot on the center: pink
             cv2.circle(imgOriginal, center, 5, (255,0,255),-1)
             
-            # bilgileri ekrana yazdır
+            # print information to screen
             cv2.putText(imgOriginal, s, (25,50), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,255,255), 2)
             
             
-        # deque
+        # deque - draw the past data
         pts.appendleft(center)
         
         for i in range(1, len(pts)):
@@ -83,32 +85,6 @@ while True:
         
             cv2.line(imgOriginal, pts[i-1], pts[i],(0,255,0),3) # 
             
-        cv2.imshow("Orijinal Tespit",imgOriginal)
+        cv2.imshow("Original Detection",imgOriginal)
         
     if cv2.waitKey(1) & 0xFF == ord("q"): break
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
