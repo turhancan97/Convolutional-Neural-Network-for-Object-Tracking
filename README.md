@@ -25,6 +25,8 @@ The project we prepared for the **Vision-based Control** lecture, which is one o
 		   * [Mask R-CNN](#faster-r-cnn)
 		   * [YOLO](#r--cnn)
 		   * [Comparison of Object Detection Algorithms](#comparison-of-object-detection-algorithms)
+* [Image Classifiaction](#image-classifiaction)
+	* [Example](#example-classification)
 * [Object Detection](#object-detection)
 	* [Examples](#example-detection)
 * [Object Recognition](#object-recognition)
@@ -37,17 +39,30 @@ The project we prepared for the **Vision-based Control** lecture, which is one o
 	* [Face and Eye Detection with OpenCV and Haar Feature based Cascade Classifiers](#face-and-eye-detection)
 	* [MNIST Image Classification with Deep Neural Network](#mnist-image-classification-with-deep-neural-network)
 	* [MNIST Image Classification with Convolutional Neural Network](#mnist-image-classification-with-convolutional-neural-network)
-	* [Face Mask Detection for COVID19 with OpenCV, Tensorflow 2 and Keras](#face-mask-detection-for-covid19)
 	* [Real Time Digit Classification](#real-time-digit-classification)
-	* [Object Detection and Tracking in Custom Datasets with Yolov4](#object-detection-and-tracking-in-custom-datasets-with-yolov4)
+	* [Real Time Object Recognition with SSD](#real-time-object-recognition-with-ssd)
 * [Future Work](#future-work)
 * [References](#references)
 
 # Summary
-pass
+In this repository, the details of image processing and computer vision are discussed. In addition, convolutional neural networks, which are frequently used in deep learning-based computer vision applications, are explained. In addition to these, seven basic level projects were exhibited in this repository to provide reinforcement on the topics discussed.
 # Introduction
 
-pass
+Mankind continues the data processing process, which started by drawing animal figures on the cave walls, with "chips" that are too small to be seen by the human eye. Although this development spanned a long period of approximately 4000 years, the real development took place in the last 50 years. It was impossible for human beings to even predict this technology, which has entered every aspect of our lives today and has become a routine of our lives. For example; A manager of IBM, one of the important companies in the computer industry, said, "No matter how small a computer gets, it cannot be smaller than a room." The fact that one of the leading names in the industry is so wrong explains how fast computer technology has developed. In this development process, human beings, who are no longer content with their own intelligence, are also trying to give intelligence to machines; Now the goal is to produce machines that are more intelligent, capable of sampling human behavior, perceiving and interpreting images, characterizing sounds and, as a result, making decisions.
+
+Although the foundations of image formation go back centuries, intensive studies on machine imaging systems started with the introduction of special equipment. With the developments in technology, the use of imaging systems; production lines, medicine, weapons systems, criminology and security spanned many areas.
+
+Today, systems with automatic movement capability include a large share of the technological development process. In the progress of robot systems, researchers have to use sensors similar to the ones that humans have, opening up to the outside world, and develop perception principles in similar ways in order to produce systems that can make faster, more dynamic and more accurate decisions. In addition, this way of working should be close to the working speed of humanoid functions and should be produced in real time.
+
+With the transfer of the image to the computer environment, there have been significant developments in the speed and capacity ratios of image processing devices. With each advancing year, digital image processors that allow obtaining higher resolution and pixelated images have begun to be developed. High resolution and pixel ratio have revealed high data capacity and significant developments have been experienced in recording 2 environments. Many manufacturers have tried to impose their own recording standard, and along with this, image processing devices using very different recording media have been introduced to the market.
+
+Many factors in the field of image processing point to continuous improvement. One of the main reasons is the falling prices of necessary computer equipment. The processing units required are getting cheaper every year. A second factor is the increase in hardware options required for digitizing and displaying images. The indications are that the prices of essential computer hardware will continue to fall. Many new technologies are developing in a way that allows the expansion of studies in this field. Microprocessors, CCDs used for digitization, new memory technologies and high resolution image systems etc. Another acceleration in development is due to the continuous continuation of new applications. The uses of digital imaging in advertising, industrial, medical and scientific research continue to grow. Significant reduction in hardware costs and the ability to make important applications show that image processing techniques will play an important role in the future.
+
+In addition, Computer Vision-based Robot systems is one of the fields that researchers have studied intensively. This issue, which is in parallel with the development of especially high-tech security solutions, industrial applications that require complex perceptions and defense technologies, has become the main study target for today's practitioners.
+
+This repository has discussed in detail the concepts of image processing and computer vision, which have recently entered our lives with the developing technology, together with the applications.
+
+This repository consists of eight main sections. The first one is the introductory part, which deals with computer vision, image processing and their difference, and also talks about neural networks and their algorithms and frameworks. The second, third, fourth and fifth sectionss are considered as image classification, object detection, recognition and tracking. There is a project list section at sixth section that describing the projects done. Finally, you can find future works and references as last two sections.
 
 ## Image Processing
 **Image processing** is a method that can be identified with different techniques in order to obtain useful information according to the relevant need through the images transferred to the digital media. The image processing method is used to process certain recorded images and modify existing images and graphics to alienate or improve them. For example, it is possible to see the quality declines when scanning photos or documents and transferring them to digital media. This is where the image processing method comes into play during the quality declines. We use image processing method to minimize the degraded image quality and visual distortions. Another example is the maps that we can access via Google Earth. Satellite images are enhanced by image processing techniques. In this way, people are presented with higher quality images. Image processing, which can be used in this and many other places, is among the rapidly developing technologies. It is also one of the main research areas of disciplines such as engineering and computer science [1].
@@ -311,9 +326,33 @@ YOLO divides the input image into NxN grids. Each grid checks if there is an obj
 
 Sometimes the same object is repeatedly marked with a bounding box because it exists in more than one grid. As a solution, the Non-max Suppression algorithm draws the bounding boxes with the highest accuracy value on the screen for the objects detected on the image. In short, bounding boxes with accuracy values below the specified threshold are deleted.
 
+### SSD (Single Shot MultiBox Detector)
+The object detection technique Single Shot MultiBox Detector (SSD) is a version of the VGG16 architecture. It was made public at the end of November 2016 and broke previous performance and accuracy records for object detection tasks, earning over 74% mAP (mean Average Precision) at 59 frames per second on benchmark datasets including PascalVOC and COCO.
+
+SSD’s architecture builds on the venerable  **VGG-16 architecture**, but discards the fully connected layers.
+
+The reason VGG-16 was used as the base network is because of its:
+
+-   strong performance in high quality image classification tasks
+-   popularity for problems where transfer learning helps in improving results
+
+Instead of the original VGG fully connected layers, a set of auxiliary convolutional layers (from conv6 onwards) were added, thus enabling to extract features at multiple scales and progressively decrease the size of the input to each subsequent layer.
+
 ### Comparison of Object Detection Algorithms
 Region-based object detection algorithms such as R-CNN first determine the areas where objects are likely to be found and then apply CNN (Convolutional Neural Network, Convolutional Neural Networks) there separately. Although this method gives good results, since an image is subjected to two separate processes, the number of processing on the image increases and causes us to get a low FPS (Frames Per Second). The reason why the YOLO algorithm is so fast is that it can predict the class and coordinates of all objects in the picture by passing the image through the neural network at once, unlike systems such as R-CNN that require thousands of operations for a single image. So the basis of this estimation process is that they treat object detection as a single regression problem. This makes it extremely fast, 1000 times faster than R-CNN and 100 times faster than Fast R-CNN. If you need to do a project about real-time object detection, give the YOLO algorithm a chance.
 ![Vision Based Control (15)](https://user-images.githubusercontent.com/22428774/174443298-6e74a3fc-6c0a-48fe-9268-5fb057224b97.png)
+# Image Classifiaction
+The process of classifying an entire image is known as image classification. It is assumed that each image will only have one class. The class to which an image belongs is predicted by image classification models when they receive an image as input.
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/175499656-bfb2bd73-e083-4a46-95de-f118c3c5f383.png)
+
+## Example Classification
+1. Satellite image classification
+2. Medical image classification
+3. Aircraft classification
+4. Chemical pattern classification
+5. Fault diagnosis
+
+![image](https://user-images.githubusercontent.com/22428774/175501485-88ad62b0-fe8b-45a6-a473-041e4ef22325.png)
 
 # Object Detection
 Object detection is a computer technology that deals with finding instances of semantic items of a specific class (such as individuals, buildings, or cars) in digital photos and videos. It is related to computer vision and image processing. Face detection and pedestrian detection are two well-studied object detection areas. Object detection can be used in a variety of computer vision applications, such as picture retrieval and video surveillance [11]. 
@@ -618,8 +657,6 @@ cap.release()
 [Click Here for Detailed Information](https://github.com/turhancan97/Convolutional-Neural-Network-for-Object-Tracking/blob/main/MNIST%20-%20DeepNN/deep-neural-network-mnist.ipynb)
 ## MNIST Image Classification with Convolutional Neural Network
 [Click Here for Detailed Information](https://github.com/turhancan97/Convolutional-Neural-Network-for-Object-Tracking/blob/main/MNIST%20-%20CNN/cnn-mnist.ipynb)
-## Face Mask Detection for COVID19
-pass
 ## Real Time Digit Classification
 In this project, it is aimed to create a Convolutional Neural Network to classify the digits from 0 to 9. Approximately 10000 images from 10 different classes are trained in the training code. A test script was then created for use with a webcam.
 
@@ -802,11 +839,21 @@ while True:
     cv2.imshow("Digit Classification",frame)
     if cv2.waitKey(1) & 0xFF == ord("q"): break    
 ```
-## Object Detection and Tracking in Custom Datasets with Yolov4
-pass
+## Real Time Object Recognition with SSD
+In this project, it is aimed to use MobileNets + Single Shot Detectors along with OpenCV to perform deep learning based real time object recognition.
+
+The end product should look similar to the GIF below:
+![Vision Based Control](https://user-images.githubusercontent.com/22428774/175503032-f70901e1-5db7-4d7c-acf9-c7f4044d3af6.gif)
+
+There are two pyton file in this project. One of them (`real_time.python`) is for real time recognition and the other (`recognition with mobilenet and ssd.py`) is for image based recognion.
+
+Some of the outputs of image based recognition:
+![Vision Based Control (1)](https://user-images.githubusercontent.com/22428774/175505182-47412e6e-a086-4ece-8b37-40e95a240af1.png)
 
 # Future Work
-pass
+
+Since we learned the basics of computer vision and image processing thanks to this project, we are planning to test them on a mobile robot with a camera and make a project that can detect objects in real time and take different actions as a result of the detections.
+
 # References
 - [1] - https://peakup.org/blog/yeni-baslayanlar-icin-goruntu-islemeye-giris/
 - [2] - https://yapayzeka.itu.edu.tr/arastirma/bilgisayarla-goru
